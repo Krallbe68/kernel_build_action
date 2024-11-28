@@ -1,30 +1,21 @@
-# A simple action usage
-name: Build Kernel
+name: CI
+
 on:
   workflow_dispatch:
 
 jobs:
-  Build-Kernel:
-    strategy:
-      fail-fast: false
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-
+  build-kernel:
+    name: Build Kernel
+    runs-on: ubuntu-20.04
     steps:
-    - name: Build Kernel
-      uses: dabao1955/kernel_build_action@main
-      with:
+      - name: Build
+        uses: dabao1955/kernel_build_action@main
+        with:
           kernel-url: https://github.com/Rohail33/Realking_kernel_sm8250.git
-          kernel-dir: apollo
           kernel-branch: main
           config: apollo_defconfig
           arch: arm64
           aosp-gcc: true
           aosp-clang: true
-          ksu: true
-          ksu-version: main
           android-version: 12
           aosp-clang-version: r383902
-          disable-lto: true
-          anykernel3: false
