@@ -1,21 +1,24 @@
-name: CI
+name: Build Mi 10T Pro Kernel
 
 on:
   workflow_dispatch:
 
 jobs:
   build-kernel:
-    name: Build Kernel
+    name: Build Kernel for Mi 10T Pro
     runs-on: ubuntu-20.04
     steps:
-      - name: Build
-        uses: dabao1955/kernel_build_action@main
+      - name: Build Kernel
+        uses: dabao1955/kernel_build_action@v1.7.0
         with:
           kernel-url: https://github.com/Rohail33/Realking_kernel_sm8250.git
           kernel-branch: main
           config: apollo_defconfig
           arch: arm64
-          aosp-gcc: true
-          aosp-clang: true
           android-version: 12
-          aosp-clang-version: r383902
+          aosp-gcc: false
+          aosp-clang: false
+          other-clang-url: https://github.com/kdrag0n/proton-clang
+          other-clang-branch: master
+          release: true
+          access-token: ${{ secrets.GITHUB_TOKEN }}
